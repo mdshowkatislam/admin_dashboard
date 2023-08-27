@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router";
 import Dashboard from "./pages/Dashboard";
+
 import Users from "./pages/Users";
 import Messages from "./pages/Messages";
 import Analytices from "./pages/Analytices";
@@ -17,7 +18,6 @@ const App = () => {
       <Sidebar>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/messages " element={<Messages />} />
           <Route path="/analytices" element={<Analytices />} />
