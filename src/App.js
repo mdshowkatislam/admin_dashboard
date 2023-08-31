@@ -1,14 +1,20 @@
 import React from "react";
 import { Routes, Route } from "react-router";
 import Dashboard from "./pages/Dashboard";
-
 import Users from "./pages/Users";
-import Messages from "./pages/Messages";
-import Analytices from "./pages/Analytices";
-import FileManager from "./pages/FileManager";
-import Order from "./pages/Order";
-import Saved from "./pages/Saved";
 import Settings from "./pages/Settings";
+import Categories from "./pages/Categories";
+
+import ContactMessages from "./pages/ContactMessages";
+import Coupon from "./pages/Coupon";
+import ManageHomeCategories from "./pages/ManageHomeCategories";
+import ManageHomeBanner from "./pages/ManageHomeBanner";
+import Orders from "./pages/Orders";
+import Products from "./pages/Products";
+import SaleSetting from "./pages/SaleSetting";
+
+import Attributes_1 from "./pages/Attributes_1";
+import Attributes_2 from "./pages/Attributes_2";
 import Sidebar from "./components/Sidebar";
 import "./App.css";
 
@@ -18,13 +24,23 @@ const App = () => {
       <Sidebar>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/messages " element={<Messages />} />
-          <Route path="/analytices" element={<Analytices />} />
-          <Route path="/fileManager" element={<FileManager />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/saved" element={<Saved />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/attributes_1" element={<Attributes_1 />} />
+          <Route path="/attributes_2" element={<Attributes_2 />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/manage_home_banner" element={<ManageHomeBanner />} />
+          <Route
+            path="/manage_home_categories"
+            element={<ManageHomeCategories />}
+          />
+          <Route path="/sale_setting" element={<SaleSetting />} />
+          <Route path="/coupon " element={<Coupon />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/contact_messages" element={<ContactMessages />} />
+
           <Route path="/settings" element={<Settings />} />
+          <Route path="/users" element={<Users />} />
+
           <Route path="*" element={<>not Found</>} />
         </Routes>
       </Sidebar>
