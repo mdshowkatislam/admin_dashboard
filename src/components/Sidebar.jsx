@@ -9,11 +9,17 @@ import {
 } from "react-icons/md";
 import { TfiSettings } from "react-icons/tfi";
 
-import { FcRightDown2 } from "react-icons/fc"; //down arrow
-import { BsCcCircle } from "react-icons/bs";
+
+
+import {
+  BsCcCircle,
+  BsFillArrowDownSquareFill,
+  BsChevronDoubleDown,
+} from "react-icons/bs";
 import { SiHomeassistant } from "react-icons/si";
 import { RiProductHuntLine } from "react-icons/ri";
-import { FcNeutralTrading, FcServices } from "react-icons/fc";
+import { FcServices, FcFlowChart } from "react-icons/fc";
+import { AiOutlineFlag } from "react-icons/ai";
 import { BsCart4 } from "react-icons/bs";
 
 import { GrUserAdmin } from "react-icons/gr";
@@ -23,17 +29,13 @@ import { SiAtandt } from "react-icons/si";
 import { BiSearch } from "react-icons/bi";
 import "../App.css";
 
-import {
-  AiFillHeart,
-  AiTwotoneFileExclamation,
-  AiOutlineBars,
-} from "react-icons/ai";
-import { BsCartCheck } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [subMenu, setSubMenu] = useState(false);
+
   const togleSubMenu = () => setSubMenu(!subMenu);
   const togleShow = () => setIsOpen(!isOpen);
   //AnimatePresence object for sidebar input section
@@ -69,30 +71,30 @@ const Sidebar = ({ children }) => {
     {
       name: "Attributes",
 
-      icon: <FcRightDown2 />,
-      subManu: {
-        attributes_1: {
+      icon: <FcFlowChart />,
+      subManu: [
+        {
           path: "/attributes_1",
           name: "Attributes_1",
           icon: <MdOutlineEditAttributes />,
         },
-        attributes_2: {
+        {
           path: "/attributes_2",
           name: "Attributes_2",
           icon: <MdEditAttributes />,
         },
-      },
+      ],
     },
     { path: "/products ", name: "Products ", icon: <RiProductHuntLine /> },
     {
-      path: "/manage_home_banner",
-      name: "ManageHomeBanner",
-      icon: <FcNeutralTrading />,
+      path: "/home_banner",
+      name: "HomeBanner",
+      icon: <AiOutlineFlag />,
     },
 
     {
-      path: "/manage_home_categories",
-      name: "ManageHomeCategories",
+      path: "/home_categories",
+      name: "HomeCategories",
       icon: <SiHomeassistant />,
     },
     { path: "/sale_setting", name: "SaleSetting", icon: <FcServices /> },
@@ -129,6 +131,7 @@ const Sidebar = ({ children }) => {
             <FaBars onClick={togleShow} />
           </div>
         </section>
+        {/* search input section  */}
         <div className="flex justify-between h-12 gap-3 p-2 text-lg transition ease-linear duration-250 item-center hover:border-white tansition hover:text-lg hover:shadow-md hover:shadow-white hover:bg-slate-800">
           <div className="items-center mt-2 text-lg transition-all ease-linear hover:scale-150 ">
             {<BiSearch />}
@@ -147,42 +150,56 @@ const Sidebar = ({ children }) => {
           </AnimatePresence>
         </div>
 
-        <section className="allroute ">
-          {allroute.map((item) => (
-            <NavLink
-              to={item.path}
-              key={item.name}
-              className="flex h-12 gap-3 p-2 text-lg transition-all ease-linear hover:animate-pulse duration-250 item-center hover:border-r-8 hover:bg-slate-800 hover:border-white tansition hover:shadow-md hover:shadow-white"
-            >
-              <span className="p-1 ase-linear ptransition hover:scale-125">
-                {item.icon}
-              </span>
+        {/* --------------------------all the sidebar links---------------------- */}
 
-              <AnimatePresence>
-                <motion.div
-                  initial="hide"
-                  animate="show"
-                  exit="hide"
-                  variants={togleMotion}
-                >
+        {allroute.map((item) => (
+          <NavLink
+            to={item.path}
+            key={item.name}
+            className="flex h-12 gap-1 p-1 mt-2 ml-1 text-lg ease-linear trasition-all duration-250 item-center hover:border-r-8 hover:bg-slate-800 hover:border-white tansition hover:shadow-md hover:shadow-white"
+          >
+            <span className="flex flex-wrap p-1 transition ease-linear hover:scale-125 hover:animate-pulse ">
+              {item.icon}
+            </span>
+
+            <AnimatePresence>
+              <motion.div
+                initial="hide"
+                animate="show"
+                exit="hide"
+                variants={togleMotion}
+              >
+                <span className="p-2 transition ease-linear hover:scale-125 hover:animate-pulse ">
                   {item.name}
+                </span>
+                <span className="relative flex-col inline-block p-1 ml-2">
                   {item.subManu && (
-                    <NavLink
-                      to={item.path}
-                      key={item.name}
-                      className="flex h-12 gap-3 p-2 text-lg transition-all ease-linear hover:animate-pulse duration-250 item-center hover:border-r-8 hover:bg-slate-800 hover:border-white tansition hover:shadow-md hover:shadow-white"
-                    >
-                      <span className="p-1 ase-linear ptransition hover:scale-125">
-                        {item.subMenu.icon}
-                      </span>
-                      <span></span>
-                    </NavLink>
+                    <BsChevronDoubleDown
+                      className={`${subMenu && "rotate-180"}`}
+                      onClick={() => setSubMenu(!subMenu)}
+                    />
                   )}
-                </motion.div>
-              </AnimatePresence>
-            </NavLink>
-          ))}
-        </section>
+
+                  {item.subManu && subMenu && open && (
+                    <>
+                      {item.subManu.map((smenu, idx) => (
+                        <NavLink
+                          key={idx}
+                          to={smenu.path}
+                          className="flex h-12 px-4 mt-2 text-center text-white transition ease-linear bg-blue-300 rounded-md cursor-pointer w-36"
+                        >
+                          <span className="absolute mt-2 transition ease-linear hover:scale-90">
+                            {smenu.name}
+                          </span>
+                        </NavLink>
+                      ))}
+                    </>
+                  )}
+                </span>
+              </motion.div>
+            </AnimatePresence>
+          </NavLink>
+        ))}
       </motion.div>
 
       <main className="text-black ">{children}</main>

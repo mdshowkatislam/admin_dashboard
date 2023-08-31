@@ -7,8 +7,8 @@ import Categories from "./pages/Categories";
 
 import ContactMessages from "./pages/ContactMessages";
 import Coupon from "./pages/Coupon";
-import ManageHomeCategories from "./pages/ManageHomeCategories";
-import ManageHomeBanner from "./pages/ManageHomeBanner";
+import HomeCategories from "./pages/HomeCategories";
+import HomeBanner from "./pages/HomeBanner";
 import Orders from "./pages/Orders";
 import Products from "./pages/Products";
 import SaleSetting from "./pages/SaleSetting";
@@ -28,13 +28,10 @@ const App = () => {
           <Route path="/attributes_1" element={<Attributes_1 />} />
           <Route path="/attributes_2" element={<Attributes_2 />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/manage_home_banner" element={<ManageHomeBanner />} />
-          <Route
-            path="/manage_home_categories"
-            element={<ManageHomeCategories />}
-          />
+          <Route path="/home_banner" element={<HomeBanner />} />
+          <Route path="/home_categories" element={<HomeCategories />} />
           <Route path="/sale_setting" element={<SaleSetting />} />
-          <Route path="/coupon " element={<Coupon />} />
+          <Route path="/coupon" element={<Coupon />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/contact_messages" element={<ContactMessages />} />
 
