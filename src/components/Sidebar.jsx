@@ -10,7 +10,6 @@ import {
 import { TfiSettings } from "react-icons/tfi";
 
 
-
 import {
   BsCcCircle,
   BsFillArrowDownSquareFill,
@@ -156,13 +155,13 @@ const Sidebar = ({ children }) => {
           <NavLink
             to={item.path}
             key={item.name}
-            className="flex h-12 gap-1 p-1 mt-2 ml-1 text-lg ease-linear trasition-all duration-250 item-center hover:border-r-8 hover:bg-slate-800 hover:border-white tansition hover:shadow-md hover:shadow-white"
+            className=" flex h-12 gap-1 p-1 mt-2 ml-1 text-lg ease-linear trasition-all duration-250 item-center hover:border-r-8 hover:bg-slate-800 hover:border-white tansition hover:shadow-md hover:shadow-white"
           >
             <span className="flex flex-wrap p-1 transition ease-linear hover:scale-125 hover:animate-pulse ">
               {item.icon}
             </span>
 
-            <AnimatePresence>
+            <AnimatePresence className="relative">
               <motion.div
                 initial="hide"
                 animate="show"
@@ -172,30 +171,40 @@ const Sidebar = ({ children }) => {
                 <span className="p-2 transition ease-linear hover:scale-125 hover:animate-pulse ">
                   {item.name}
                 </span>
-                <span className="relative flex-col inline-block p-1 ml-2">
+                <span className="relative flex-col inline-block  ml-2 ">
                   {item.subManu && (
                     <BsChevronDoubleDown
                       className={`${subMenu && "rotate-180"}`}
                       onClick={() => setSubMenu(!subMenu)}
                     />
                   )}
-
-                  {item.subManu && subMenu && open && (
-                    <>
-                      {item.subManu.map((smenu, idx) => (
-                        <NavLink
-                          key={idx}
-                          to={smenu.path}
-                          className="flex h-12 px-4 mt-2 text-center text-white transition ease-linear bg-blue-300 rounded-md cursor-pointer w-36"
-                        >
-                          <span className="absolute mt-2 transition ease-linear hover:scale-90">
-                            {smenu.name}
-                          </span>
-                        </NavLink>
-                      ))}
-                    </>
-                  )}
                 </span>
+
+                {item.subManu && subMenu && open && (
+                  <motion.div
+                    className="mt-4 absolute h-[100px]"
+                    initial="hide"
+                    animate="show"
+                    exit="hide"
+                    variants={togleMotion}
+                  >
+                    {item.subManu.map((smenu, idx) => (
+                      <NavLink
+                        key={idx}
+                        to={smenu.path}
+                        v
+                        className="flex gap-2 h-10 px-2 mt-1 text-center text-white transition ease-linear bg-gradient-to-br from-slate-900 to-black rounded-md cursor-pointer w-36 "
+                      >
+                        <span className=" transition ease-linear hover:scale-125 hover:animate-pulse  mt-2 text-2xl ">
+                          {smenu.icon}
+                        </span>
+                        <span className=" mt-1 transition ease-linear hover:scale-90 opasity-10 ">
+                          {smenu.name}
+                        </span>
+                      </NavLink>
+                    ))}
+                  </motion.div>
+                )}
               </motion.div>
             </AnimatePresence>
           </NavLink>
